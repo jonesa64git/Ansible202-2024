@@ -1,0 +1,19 @@
+---
+- name: USE URI MODULE TO INTERACT WITH REDFISH ENDPOINT
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+  - name: Connect to website using a previously stored cookie
+    ansible.builtin.uri:
+      url: http://127.0.0.1:2224/redfish/v1/Systems/437XR1138R2/VirtualMedia/CD1/
+      method: GET
+      return_content: true
+      #headers:
+      #  Cookie: "{{ login.cookies_string }}"
+    register: apicontent
+
+  - name: Show API Content Output
+    debug:
+      var: apicontent
