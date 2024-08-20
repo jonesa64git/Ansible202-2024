@@ -1,0 +1,16 @@
+---
+- name: CONTROL THE POWER STATE OF DELL POWEREDGE
+  hosts: localhost
+    #connection: local
+  gather_facts: false
+
+  tasks:
+  - name: Runs a local script on a remote node after transferring it
+    script: GetSetPowerStateREDFISH.py -ip 10.0.0.89 -u root -p r0gerwilc0 --set On
+    args:
+      executable: /usr/bin/python3
+    register: result
+
+  - name: Show the Result
+    debug:
+      var: result
