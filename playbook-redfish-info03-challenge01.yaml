@@ -1,0 +1,22 @@
+- name: Use Redfish to gather Memory Inventory
+  hosts: Redfish   # this is the group we are using
+  connection: local   # we don't want to SSH anywhere
+  gather_facts: false  # if we did gather facts, they would be about ourselves (connection:local)
+
+  collections:
+    community.general
+
+  tasks:
+  - name: Get Memory Inventory
+    community.general.redfish_info:
+      category: Systems
+      command: GetMemoryInventory
+      baseuri: "{{ baseuri }}"     # needs provided @ runtime (extravars, vault, separate file, etc.)
+      username: "{{ username }}"   # needs provided @ runtime (extravars, vault, separate file, etc.)
+      password: "{{ password }}"   # needs provided @ runtime (extravars, vault, separate file, etc.)
+    register: memInv
+
+  - name: Display Memory data
+    debug:
+      var: memInv
+      #var: memInv.redfish_facts.memory.entries[0][1][0].CapacityMiB
