@@ -1,0 +1,56 @@
+{
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "failed": false,
+    "redfish_facts": {
+        "cpu": {
+            "entries": [
+                [
+                    {
+                        "system_uri": "/redfish/v1/Systems/437XR1138R2"
+                    },
+                    [
+                        {
+                            "Id": "CPU1",
+                            "Manufacturer": "Intel(R) Corporation",
+                            "MaxSpeedMHz": 3700,
+                            "Model": "Multi-Core Intel(R) Xeon(R) processor 7xxx Series",
+                            "Name": "Processor",
+                            "ProcessorArchitecture": "x86",
+                            "Status": {
+                                "Health": "OK",
+                                "State": "Enabled"
+                            },
+                            "TotalCores": 8,
+                            "TotalThreads": 16
+                        },
+                        {
+                            "Id": "CPU2",
+                            "Name": "Processor",
+                            "Status": {
+                                "State": "Absent"
+                            }
+                        },
+                        {
+                            "Id": "FPGA1",
+                            "Manufacturer": "Intel(R) Corporation",
+                            "Model": "Stratix 10",
+                            "Name": "FPGA",
+                            "ProcessorArchitecture": "OEM",
+                            "Status": {
+                                "Health": "OK",
+                                "State": "Enabled"
+                            }
+                        }
+                    ]
+                ]
+            ],
+            "ret": true
+        }
+    },
+    "warnings": [
+        "Platform linux on host rf04 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information."
+    ]
+}
