@@ -1,0 +1,19 @@
+---
+- name: USE dellemc.openmanage.redfish_powerstate TO POWER UP THE POWEREDGE SERVER
+  hosts: idrac
+  connection: local
+  gather_facts: false
+  vars:
+    - powerstate: "On"
+    - user: "root"
+    - idrac_password: ""    # Set the correct password during playbook execution with the -e flag.
+
+  tasks:
+  - name: Control Dell PowerEdge Power State
+    ansible.builtin.include_role:
+      name: powercycle
+    vars:
+      ip: "{{ idrac_ip }}"
+      pw: "{{ idrac_password }}"
+      ps: "{{ powerstate }}"
+      un: "{{ user }}"

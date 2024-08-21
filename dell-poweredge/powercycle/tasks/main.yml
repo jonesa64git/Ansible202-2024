@@ -1,0 +1,11 @@
+---
+# tasks file for powercycle
+  - name: "Manage power state of a specified device"
+    dellemc.openmanage.redfish_powerstate:
+      baseuri: "{{ ip }}"
+      username: "{{ un }}"
+      password: "{{ pw }}"
+      #ca_path: "/path/to/ca_cert.pem"
+      validate_certs: False
+      reset_type: "{{ ps }}"
+      #resource_id: "System.Embedded.1"
