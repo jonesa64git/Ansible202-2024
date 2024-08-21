@@ -1,0 +1,43 @@
+---
+- name: Wednesday Warmup
+  hosts: redfish
+  connection: local
+  gather_facts: false
+
+  #collections:
+  #  community.general 
+
+  tasks:
+  - name: Get CPU model
+    community.general.redfish_info:
+      category: Systems
+      command: GetCpuInventory
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    register: cpuinfo
+
+  - name: Restart system power gracefully
+    community.general.redfish_command:
+      category: Systems
+      command: PowerForceOff
+        #resource_id: BMC
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    register: powerstate
+
+  - name: Show CPU info
+    debug:
+      var: cpuinfo
+
+  - name: Show Powerstate Info
+    debug:
+      var: powerstate
+
+  - name: Show CPU1 Model Information
+    debug:
+      #var: cpuinfo.redfish_facts.cpu.entries[0][1][0].Model
+      msg: 
+        - CPUID: "{{ cpuinfo.redfish_facts.cpu.entries[0][1][0].Id }}"
+        - Model: "{{ cpuinfo.redfish_facts.cpu.entries[0][1][0].Model }}"

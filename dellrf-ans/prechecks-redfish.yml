@@ -1,0 +1,27 @@
+  # Precheck
+  - name: Assert that an expected condition is true (this is a chicago asset)
+    assert:
+      that:
+          - "'Chicago' in results.redfish_facts.system.entries[0][1].AssetTag"
+      success_msg: "Confirmed a Chicago asset"
+
+  - name: Ensure the correct model is being used
+    assert:
+      that:
+        - results.redfish_facts.system.entries[0][1].Model == "3500"
+      success_msg: "Confrimed model 3500"
+      fail_msg: "This does not appear to be a model 3500. Aborting."
+
+  - name: Ensure the correct BIOS Version being used
+    assert:
+      that:
+        - results.redfish_facts.system.entries[0][1].BiosVersion == "P79 v1.45 (12/06/2017)"
+      success_msg: "Confrimed BIOS version P79 v1.45 (12/06/2017)"
+      fail_msg: "This does not appear to have the correct BIOS version. Aborting."
+
+  - name: Ensure the PowerState is ON
+    assert:
+      that:
+        - results.redfish_facts.system.entries[0][1].PowerState == "On"
+      success_msg: "Confrimed PowerState is On"
+      fail_msg: "PowerState shows OFF"
