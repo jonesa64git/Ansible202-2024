@@ -1,0 +1,5 @@
+---
+# vars file for poweredge-status-logs
+i_ip: "10.0.0.89"
+i_user: "root"
+i_pass: "r0gerwilc0"

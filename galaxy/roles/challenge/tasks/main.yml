@@ -1,0 +1,13 @@
+---
+# tasks file for galaxy/roles/challenge
+- name: Poll iDRAC lifecycle status
+  dellemc.openmanage.idrac_lifecycle_controller_status_info:
+          validate_certs: False        # in production, turn this to True
+          idrac_ip: "{{ idrac_ip }}"
+          idrac_user: "{{ idrac_user }}"
+          idrac_password: "{{ idrac_password }}"
+  register: results
+
+- name: Display the information collected on the Lifecycle Controller
+  debug:
+    var: results
