@@ -1,0 +1,23 @@
+---
+# tasks file for poweredge-ops
+
+- name: Show status of the Lifecycle Controller
+  dellemc.openmanage.idrac_system_info:
+    idrac_ip: "{{ i_ip }}"
+    idrac_user: "{{ i_user }}"
+    idrac_password: "{{ i_pass }}"
+    validate_certs: False
+  register: results
+
+#- name: Show us what you learned
+#  debug:
+#    var: results
+#  tags: output
+
+- name: Check Power Supply State
+  assert:
+    that:
+      item.PrimaryStatus == "Healthy"
+    fail_msg: "{{ item.DeviceDescription }} is Unhealthy."
+    success_msg: "{{ item.DeviceDescription }} is Healthy."
+  loop: "{{ results.system_info.PowerSupply }}"
