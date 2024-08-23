@@ -1,0 +1,4 @@
+---
+- name: Include a playbook from a collection
+  ansible.builtin.import_playbook: alta3.enterprisesolutions.my_playbook.yml
+

@@ -1,0 +1,16 @@
+---
+- name: TESTING LOOPS
+  hosts: localhost
+  connection: local
+
+  vars:
+    publishers:
+    - marvel
+    - dc
+    - dark horse
+
+  tasks:
+  - name: using loops
+    debug:
+      msg: "{{ item }}"
+    loop: "{{ publishers }}"
